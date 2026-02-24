@@ -1,0 +1,42 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+
+# Código fuente (solo necesitamos dist/)
+src/
+test/
+
+# Archivos de configuración de desarrollo
+.git/
+.gitignore
+.eslintrc.js
+.eslintrc.yml
+.prettierrc
+
+.env
+.env.*
+
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de build y CI
+sonar-project.properties
+tsconfig.json
+tsconfig.build.json
+nest-cli.json
+
+# Documentación
+readme.md
+README.md
+*.md
+
+# Deploy configs (no necesarios en imagen)
+deploy/
+
+# Docker
+Dockerfile
+.dockerignore

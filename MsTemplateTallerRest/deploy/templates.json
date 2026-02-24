@@ -1,0 +1,16 @@
+{
+    "Files": [{
+        "template_name": "template-ocp",
+        "params_file": "deploy_dev.params",
+        "environment": "DEV_OP" //Para despleigues en ARO se debe quitar el _OP ej: DEV
+    },{
+        "template_name": "template-ocp",
+        "params_file": "deploy_qa.params",
+        "environment": "QA_OP" //Para despleigues en ARO se debe quitar el _OP ej: QA
+    }, {
+        "template_name": "template-ocp",
+        "params_file": "deploy_prod.params",
+        "environment": "PROD_OP" //Para despleigues en ARO se debe quitar el _OP ej: PROD
+    }]
+    
+}

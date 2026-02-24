@@ -1,0 +1,25 @@
+{
+  "mongodb": {
+    "depndencies": {
+      "@nestjs/mongoose": "^10.0.0",
+      "mongoose": "^7.0.0"
+    }
+  },
+  "oracledb": {
+    "dependencies": {
+      "oracledb": "^6.10.0",
+      "sequelize-typescript": "^2.1.6"
+    }
+  },
+  "pcml": {
+    "dependencies": {
+      "node-jt400": "^6.0.1"
+    }
+  },
+  "kafkapub": {
+    "dependencies": {
+      "kafkajs": "^2.2.4",
+      "kafkajs-snappy": "^1.1.0"
+    }
+  }
+}
