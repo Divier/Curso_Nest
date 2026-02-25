@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MainExampleController = void 0;
+const fastify_1 = require("fastify");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const processTime_service_1 = require("../../share/domain/config/processTime.service");
@@ -106,7 +108,7 @@ __decorate([
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, main_example_request_dto_1.MainExampleRequest]),
+    __metadata("design:paramtypes", [typeof (_a = typeof fastify_1.FastifyReply !== "undefined" && fastify_1.FastifyReply) === "function" ? _a : Object, main_example_request_dto_1.MainExampleRequest]),
     __metadata("design:returntype", Promise)
 ], MainExampleController.prototype, "restGetPokemonsExampleController", null);
 __decorate([
@@ -118,7 +120,7 @@ __decorate([
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Param)('name')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [typeof (_b = typeof fastify_1.FastifyReply !== "undefined" && fastify_1.FastifyReply) === "function" ? _b : Object, String]),
     __metadata("design:returntype", Promise)
 ], MainExampleController.prototype, "restGetPokemonByNameExampleController", null);
 exports.MainExampleController = MainExampleController = __decorate([
