@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   HttpStatus,
   Inject,
   Injectable,
@@ -13,7 +12,6 @@ import { ApiResponseDto } from '../../share/domain/dto/apiResponse.dto';
 
 import {
   MSG_500,
-  MSG_EMPATY_FILTERS,
 } from '../../share/domain/resources/constants';
 
 import { AppLoggerService } from '../../share/domain/config/logger.service';
@@ -43,11 +41,7 @@ export class MainExampleService {
     mainExampleRequest: MainExampleRequest,
     processTime: any,
   ): Promise<ApiResponseDto> {
-    const groups: string[] = this.getGroupsFromDto(
-      MainExampleRequest,
-      mainExampleRequest,
-    );
-    if (groups.length === 0) throw new BadRequestException(MSG_EMPATY_FILTERS);
+
     try {
       /**
        * Logica de negocio y llamada a otros servicios

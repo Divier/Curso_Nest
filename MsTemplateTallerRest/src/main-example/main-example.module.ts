@@ -4,6 +4,8 @@ import configuration from '../share/domain/resources/env.config';
 import { AppLoggerService } from '../share/domain/config/logger.service';
 import { MainExampleController } from './controller/main-example.controller';
 import { MainExampleService } from './application/main-example.service';
+import { NewContractService } from './application/restExample.service';
+import { ProviderService } from './infrastructure/infrastructure/rest/impl/provider.service.impl';
 
 /**
  *  @description clase anotada con un decorador @Module(). El decorador @Module() proporciona
@@ -20,6 +22,6 @@ import { MainExampleService } from './application/main-example.service';
     }),
   ],
   controllers: [MainExampleController],
-  providers: [MainExampleService, AppLoggerService],
+  providers: [MainExampleService, AppLoggerService, NewContractService, ProviderService],
 })
 export class MainExampleModule {}

@@ -13,6 +13,8 @@ const env_config_1 = require("../share/domain/resources/env.config");
 const logger_service_1 = require("../share/domain/config/logger.service");
 const main_example_controller_1 = require("./controller/main-example.controller");
 const main_example_service_1 = require("./application/main-example.service");
+const restExample_service_1 = require("./application/restExample.service");
+const provider_service_impl_1 = require("./infrastructure/infrastructure/rest/impl/provider.service.impl");
 let MainExampleModule = class MainExampleModule {
 };
 exports.MainExampleModule = MainExampleModule;
@@ -25,7 +27,7 @@ exports.MainExampleModule = MainExampleModule = __decorate([
             }),
         ],
         controllers: [main_example_controller_1.MainExampleController],
-        providers: [main_example_service_1.MainExampleService, logger_service_1.AppLoggerService],
+        providers: [main_example_service_1.MainExampleService, logger_service_1.AppLoggerService, restExample_service_1.NewContractService, provider_service_impl_1.ProviderService],
     })
 ], MainExampleModule);
 //# sourceMappingURL=main-example.module.js.map

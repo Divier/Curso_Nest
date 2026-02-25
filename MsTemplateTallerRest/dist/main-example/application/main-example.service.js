@@ -20,16 +20,12 @@ const business_exceptions_1 = require("../../share/domain/config/business-except
 const apiResponse_dto_1 = require("../../share/domain/dto/apiResponse.dto");
 const constants_1 = require("../../share/domain/resources/constants");
 const logger_service_1 = require("../../share/domain/config/logger.service");
-const main_example_request_dto_1 = require("../domain/dto/main-example.request.dto");
 let MainExampleService = class MainExampleService {
     constructor(logger, configService) {
         this.logger = logger;
         this.configService = configService;
     }
     async consultExecOperationExample(mainExampleRequest, processTime) {
-        const groups = this.getGroupsFromDto(main_example_request_dto_1.MainExampleRequest, mainExampleRequest);
-        if (groups.length === 0)
-            throw new common_1.BadRequestException(constants_1.MSG_EMPATY_FILTERS);
         try {
             return new apiResponse_dto_1.ApiResponseDto(common_1.HttpStatus.OK, 'Proceso ejecutado correctamente', {}, this.transactionId);
         }

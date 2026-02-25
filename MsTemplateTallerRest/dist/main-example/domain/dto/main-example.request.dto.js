@@ -18,116 +18,22 @@ class MainExampleRequest {
 exports.MainExampleRequest = MainExampleRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Canal que realiza la transacción',
-        required: true,
-    }),
-    (0, class_validator_1.IsString)({ message: `El campo $property debe ser una cadena de texto` }),
-    (0, class_validator_1.IsNotEmpty)({ message: `El campo $property no puede estar vacío` }),
-    (0, class_transformer_1.Transform)(({ value }) => value === null || value === void 0 ? void 0 : value.trim()),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "transactionChannel", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Número del suscriptor (Movil: MSISDN, Hogar: ISDN)',
-        required: false,
-    }),
-    (0, class_validator_1.ValidateIf)((o) => o.subscriberNumber !== undefined, {
-        groups: ["1"],
+        default: 10,
+        description: 'Cuantos pokemones se desean obtener',
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumberString)(null, { message: `El campo $property solo acepta Números` }),
-    (0, class_transformer_1.Transform)(({ value }) => value === null || value === void 0 ? void 0 : value.trim()),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "subscriberNumber", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Número de cuenta del cliente', required: false }),
-    (0, class_validator_1.ValidateIf)((o) => o.accountNumber !== undefined, {
-        groups: ["2"],
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumberString)(null, { message: `El campo $property solo acepta Números` }),
-    (0, class_transformer_1.Transform)(({ value }) => value === null || value === void 0 ? void 0 : value.trim()),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "accountNumber", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Número del documento financiero a consultar',
-        required: false,
-    }),
-    (0, class_validator_1.ValidateIf)((o) => o.financialDocID !== undefined),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumberString)(null, { message: `El campo $property solo acepta Números` }),
-    (0, class_transformer_1.Transform)(({ value }) => value === null || value === void 0 ? void 0 : value.trim()),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "financialDocID", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Estado del documento financiero a consultar',
-        required: false,
-    }),
-    (0, class_validator_1.ValidateIf)((o) => o.financialDocStatus !== undefined),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)({ message: `El campo $property debe ser una cadena de texto` }),
-    (0, class_validator_1.IsNotEmpty)({ message: `El campo $property no puede estar vacío` }),
-    (0, class_transformer_1.Transform)(({ value }) => value === null || value === void 0 ? void 0 : value.trim()),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "financialDocStatus", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Referencia de pago del documento',
-        required: false,
-    }),
-    (0, class_validator_1.ValidateIf)((o) => o.paymentReference !== undefined, {
-        groups: ["3"],
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)({ message: `El campo $property debe ser una cadena de texto` }),
-    (0, class_validator_1.IsNotEmpty)({ message: `El campo $property no puede estar vacío` }),
-    (0, class_transformer_1.Transform)(({ value }) => value === null || value === void 0 ? void 0 : value.trim()),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "paymentReference", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Fecha de vencimiento del documento desde cuando se realiza la consulta',
-        required: false,
-    }),
-    (0, class_validator_1.ValidateIf)((o) => o.dueDateFrom !== undefined),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.Matches)(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-05:00$/, {
-        message: 'El campo $property debe tener el formato YYYY-MM-DDThh:mm:ss-05:00',
-    }),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "dueDateFrom", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Fecha de vencimiento del documento hasta cuando se realiza la consulta',
-        required: false,
-    }),
-    (0, class_validator_1.ValidateIf)((o) => o.dueDateTo !== undefined),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.Matches)(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-05:00$/, {
-        message: 'El campo $property debe tener el formato YYYY-MM-DDThh:mm:ss-05:00',
-    }),
-    __metadata("design:type", String)
-], MainExampleRequest.prototype, "dueDateTo", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Límite de registros a retornar',
-        required: true,
-    }),
-    (0, class_validator_1.Min)(1, { message: 'El campo $property debe ser mayor que 0' }),
+    (0, class_validator_1.IsPositive)(),
+    (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
-], MainExampleRequest.prototype, "resultLimit", void 0);
+], MainExampleRequest.prototype, "limit", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Valor que indicara si se requiere validar en tabla bridge el número de línea o cuenta',
-        required: false,
+        default: 0,
+        description: 'Cuantos registros desea omitir',
     }),
-    (0, class_validator_1.ValidateIf)((o) => o.validarTB !== undefined),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)({
-        message: `El campo $property solo acepta valores 'true' o 'false'`,
-    }),
-    __metadata("design:type", Boolean)
-], MainExampleRequest.prototype, "validarTB", void 0);
+    (0, class_validator_1.Min)(0),
+    (0, class_transformer_1.Type)(() => Number),
+    __metadata("design:type", Number)
+], MainExampleRequest.prototype, "offset", void 0);
 //# sourceMappingURL=main-example.request.dto.js.map
