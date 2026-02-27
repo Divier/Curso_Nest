@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus } from '@nestjs/common';
-import { NewContractService } from '../../../src/restExample/application/restExample.service';
-import { IProviderService } from '../../../src/restExample/infrastructure/rest/provider.service';
+import { NewContractService } from '../../../src/main-example/application/restExample.service';
+import { IProviderService } from '../../../src/main-example/infrastructure/infrastructure/rest/provider.service';
 import { AppLoggerService } from '../../../src/share/domain/config/logger.service';
 import { ApiResponseDto } from '../../../src/share/domain/dto/apiResponse.dto';
 import { BusinessException } from '../../../src/share/domain/config/business-exceptions';

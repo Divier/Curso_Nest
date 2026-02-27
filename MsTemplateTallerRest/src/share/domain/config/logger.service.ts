@@ -22,8 +22,8 @@ export class AppLoggerService implements LoggerService {
   });
 
   log(message: string, methodName?: string, processingTime?: string, transactionId?: string, request?: string, response?: string) {
-    const isTruncated = process.env.TRUNCATED_RESPONSE ==='true';
-    const truncateLength = Number.parseInt(process.env.CHARACTERS || "0");
+    const isTruncated = process.env.RESPONSE_TRUNCATED ==='true';
+    const truncateLength = Number.parseInt(process.env.RESPONSE_TRUNCATE_LENGTH || "0");
     response = isTruncated && response && response.length > truncateLength ? 
       response.substring(0, truncateLength) + '...':
       response;

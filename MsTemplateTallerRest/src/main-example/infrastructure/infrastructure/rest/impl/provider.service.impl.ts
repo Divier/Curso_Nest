@@ -1,17 +1,9 @@
 
 import { Injectable } from "@nestjs/common";
-
-//import { HttpUndiciProvider } from "../../../../share/infrastructure/REST/impl/http.provider.impl";
-import { HttpUndiciProvider } from "src/share/infrastructure/REST/impl/http.provider.impl";
-
+import { HttpUndiciProvider } from "../../../../../share/infrastructure/REST/impl/http.provider.impl";
 import { IProviderService } from "../provider.service";
-
-//import { IRequestConfigHttp } from "../../../../share/domain/config/request-config-http.models";
-import { IRequestConfigHttp } from "src/share/domain/config/request-config-http.models";
-
-//import { Etask } from "../../../../share/domain/resources/constants";
-import { Etask } from "src/share/domain/resources/constants";
-
+import { IRequestConfigHttp } from "../../../../../share/domain/config/request-config-http.models";
+import { Etask } from "../../../../../share/domain/resources/constants";
 
 /**
  * Clase generica para realizar consumos a legados Rest

@@ -14,11 +14,13 @@ import { ApiResponseDto } from '../../share/domain/dto/apiResponse.dto';
 import { ApmInterceptor } from '../../share/domain/config/apm.interceptor';
 import { AppLoggerService } from '../../share/domain/config/logger.service';
 import { MainExampleRequest } from '../domain/dto/main-example.request.dto';
-import { NewContractService } from '../application/restExample.service';
 import {
   EHttpMethod,
   IRequestConfigHttp,
 } from 'src/share/domain/config/request-config-http.models';
+import { MainExampleService } from '../application/main-example.service';
+import { ConfigType } from '@nestjs/config';
+import config from '../../share/domain/resources/env.config';
 
 /**
  *  @description Archivo controlador responsable de manejar las solicitudes entrantes que llegan a un end point.
@@ -33,9 +35,10 @@ export class MainExampleController {
   @Inject('TransactionId') private readonly transactionId: string;
 
   constructor(
-    private readonly serviceRest: NewContractService,
+    private readonly mainExampleService: MainExampleService,
     private readonly processTimeService: ProcessTimeService,
     private readonly logger: AppLoggerService,
+    @Inject(config.KEY) private configService: ConfigType<typeof config>,
   ) {}
 
   @ApiResponse({
@@ -51,7 +54,7 @@ export class MainExampleController {
     let serviceResponse: ApiResponseDto;
 
     const payload: IRequestConfigHttp = {
-      url: `https://pokeapi.co/api/v2/pokemon`,
+      url: this.configService.REST.URL,
       method: EHttpMethod.get,
       params: {
         limit: queryParams.limit,
@@ -68,10 +71,11 @@ export class MainExampleController {
         JSON.stringify(payload),
       );
 
-      serviceResponse = await this.serviceRest.restService(
-        payload,
-        processTime,
-      );
+      serviceResponse =
+        await this.mainExampleService.consultExecOperationExample(
+          payload,
+          processTime,
+        );
 
       serviceResponse = {
         responseCode: 200,
@@ -111,7 +115,7 @@ export class MainExampleController {
     let serviceResponse: ApiResponseDto;
 
     const payload: IRequestConfigHttp = {
-      url: `https://pokeapi.co/api/v2/pokemon/${name}`,
+      url: `${this.configService.REST.URL}/${name}`,
       method: EHttpMethod.get,
     };
 
@@ -124,19 +128,20 @@ export class MainExampleController {
         JSON.stringify(payload),
       );
 
-      serviceResponse = await this.serviceRest.restService(
-        payload,
-        processTime,
-      );
+      serviceResponse =
+        await this.mainExampleService.consultExecOperationExample(
+          payload,
+          processTime,
+        );
 
-      if(serviceResponse.responseCode === 404){
+      if (serviceResponse.responseCode === 404) {
         serviceResponse = {
           responseCode: 404,
           message: `Pokemon ${name} no encontrado`,
           data: serviceResponse.data,
           timestamp: new Date().toISOString(),
           transactionId: this.transactionId,
-        }
+        };
       } else {
         serviceResponse = {
           responseCode: 200,

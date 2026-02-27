@@ -12,6 +12,7 @@ import { registerAs } from '@nestjs/config';
 export default registerAs('configuration', () => ({
   PORT: process.env.PORT,
   TIMEOUT: parseInt(process.env.TIMEOUT),
+  SERVICE_NAME : process.env.SERVICE_NAME,
   APM: {
     HOST: process.env.ELASTIC_APM_SERVER_URL,
     ENVIRONMENT: process.env.ELASTIC_APM_ENVIRONMENT,
@@ -21,14 +22,15 @@ export default registerAs('configuration', () => ({
     URL: process.env.HTTP_URL,
     TIMEOUT: parseInt(process.env.HTTP_TIMEOUT),
     HEADERS_TIMEOUT: parseInt(process.env.HTTP_HEADERS_TIMEOUT),
-  },  ORACLE: {
-    LEGACY_DB_CONNECT_STRING: process.env.LEGACY_DB_CONNECT_STRING,
-    LEGACY_DB_VAR1: process.env.LEGACY_DB_VAR1,
-    LEGACY_DB_VAR2: process.env.LEGACY_DB_VAR2,
-    LEGACY_DB_POOL_MAX: process.env.LEGACY_DB_POOL_MAX,
-    LEGACY_DB_POOL_MIN: process.env.LEGACY_DB_POOL_MIN,
-    LEGACY_DB_PL: process.env.LEGACY_DB_PL,
-    LEGACY_DB_ALIAS: process.env.LEGACY_DB_ALIAS,
-  },}));
-
-
+  },
+  LOG: {
+    RESPONSE_TRUNCATED: process.env.RESPONSE_TRUNCATED,
+    RESPONSE_TRUNCATE_LENGTH: process.env.RESPONSE_TRUNCATE_LENGTH
+  },
+  KAFKA: {
+    URL: process.env.KAFKA_URL,
+    BROKER_SSL: process.env.KAFKA_BROKER_SSL,
+    TOPIC: process.env.KAFKA_TOPIC,
+    CLIENT_ID: process.env.KAFKA_CLIENT_ID,
+  }
+}));

@@ -1,4 +1,4 @@
-import { ProviderService } from "../../../../../src/restExample/infrastructure/rest/impl/provider.service.impl";
+import { ProviderService } from "../../../../../src/main-example/infrastructure/infrastructure/rest/impl/provider.service.impl";
 import { ApiResponseDto } from "../../../../../src/share/domain/dto/apiResponse.dto";
 import { Etask } from "../../../../../src/share/domain/resources/constants";
 import { EHttpMethod, IRequestConfigHttp } from "../../../../../src/share/domain/config/request-config-http.models";
