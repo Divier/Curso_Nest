@@ -3,21 +3,21 @@ _Versión:_ 1.0
 
 [[_TOC_]]
 
-# Nombre del microservicio 
+# MsTallerPokemon 
 
 ---
 ## Control del documento
 
-- **Nombre del servicio**: El nombre debe ser igual al del HLS. 
-- **Proyecto**: Indicar el nombre del proyecto (por ejemplo, WhatsApp). **Nota:** Este valor debe coincidir exactamente con el contenido del campo `PROYECTO` en el archivo `.params`.
+- **Nombre del servicio**: MsTallerPokemon. 
+- **Proyecto**:ECOMMERCE.
 - **Namespace**: Indicar el namespace productivo.
-- **Tecnología**: Springboot-Maven, Springboot-Gradle, NestJS, NodeJS y Apache Camel.
-- **Fábrica**: Indicar la fábrica encargada del desarrollo.
+- **Tecnología**: NestJS.
+- **Fábrica**: Fabrica Digital.
 
 ---
 ## Alcance
 
-**Objetivo del microservicio**: Descripción breve y clara de la funcionalidad del microservicio.
+**Objetivo del microservicio**: Microservicio para consultar informacion de los pokemon.
 
 **Nota:** El contenido debe ser coherente con la información proporcionada en el campo `DESCRIPTION` del archivo `.params`.
 
@@ -27,7 +27,7 @@ _Versión:_ 1.0
 
 | **Referencia** | **_Endpoint_** |
 |--|--|
-| Swagger | Ejemplo: /api, /swagger-ui.html, /api-docs |
+| Swagger | localhost:8080/api |
 
 **Nota:** Si el Swagger se encuentra en la raíz, el valor de la columna _endpoint_ debe ser `/`.
 
@@ -40,14 +40,14 @@ _Versión:_ 1.0
 Imagen legible del diagrama de componentes.
 
 Ejemplo:
-![image.png](/.attachments/image-a28767ca-d151-4b71-a7eb-06be46471e5f.png)
+![Diagrama_Componentes.png](/.attachments/diagrama_componentes.png)
 
 ### Diagrama de secuencia
 
 Imagen legible del diagrama de secuencia.
 
 Ejemplo:
-![image.png](/.attachments/image-811c90fd-b712-4009-a1c9-04fa53b3e3fa.png)
+![image.png](/.attachments/diagrama_secuencia.png)
 
 ---
 
@@ -82,13 +82,13 @@ c) Cuando el microservicio se consume directamente por ruta (no por 3scale ni AP
 
 En esta sección se deben indicar cada uno de los métodos del microservicio. La información de cada método debe incluir la descripción, el *path*, *headers*, parámetros (si aplica), *body* (si aplica).
 
-- **Método 1:** Indicar el método (GET/POST/PUT/PATCH/DELETE) - Descripción clara del método
+- **Método 1:** GET - Devuelve una lista de pokemones
 
 | **Mapeo de campos** | **Descripción** |
 |--|--|
-| Método | GET/POST/PUT/PATCH/DELETE |
-| URL|  |
-| Descripción |  |
+| Método | GET |
+| URL| http://localhost:8080/MS/CUS/CustomerBill/RSCuAcBalPartialDetail/V1/GET/partialBalance/GET/mainOperationExample/getPokemons |
+| Descripción | Trae un listado de pokemones |
 | _Request headers_ |  |
 
 **Request (*Parameters*/*Body*)**
@@ -97,9 +97,8 @@ _Parameters_ (si aplica, por ejemplo en métodos `GET`)
 
 | **Nombre del parámetro** | **Tipo** | **Obligatoriedad** | **Descripción** | **Valor de prueba** |
 |--|--|--|--|--|
-| | |  |  |  |
-| | |  |  |  |
-| | |  |  |  |
+| limit | string | ❌ | cantidad de pokemones a traer | 1 |
+| offset | string | ❌ | cantidad de pokemones a saltar | 0 |
 
 Body (si aplica, por ejemplo en métodos `POST`, `PUT`, `PATCH`)
 ```JSON
@@ -110,18 +109,34 @@ Body (si aplica, por ejemplo en métodos `POST`, `PUT`, `PATCH`)
 Response
 
 ```JSON
-{}
+{
+    "responseCode": 200,
+    "message": "Operación exitosa",
+    "data": {
+        "count": 1350,
+        "next": "https://pokeapi.co/api/v2/pokemon?offset=1&limit=1",
+        "previous": null,
+        "results": [
+            {
+                "name": "bulbasaur",
+                "url": "https://pokeapi.co/api/v2/pokemon/1/"
+            }
+        ]
+    },
+    "timestamp": "2026-03-02T20:20:23.332Z",
+    "transactionId": "14d25882-f470-47ba-a304-70886d4dbf06"
+}
 
 ```
 
 Ejemplo:
-- **Método 1:** GET - Consulta de datos demográficos 
+- **Método 2:** GET - Consulta la informacion de un pokemon por nombre 
 
 | **Mapeo de campos** | **Descripción** |
 |--|--|
 | Método | GET |
-| URL| http://localhost:8080/get/CustomerData?tipoConsulta=D&datosConsUno=1&datosConsDos=1116440512 |
-| Descripción | Realiza el consumo del procedimiento almacenado: SYSADM.PKG_UTL_BSCS.PRC_OBT_DATOS_CLIENTE_ESTADO para obtener los datos demográficos de un cliente móvil a partir del min |
+| URL| http://localhost:8080/MS/CUS/CustomerBill/RSCuAcBalPartialDetail/V1/GET/partialBalance/GET/mainOperationExample/getPokemonByName/:name |
+| Descripción | Retorna la informacion del pokemon enviado por parametro de la URL |
 | _Request headers_* | N/A |
 
 \* No exponer información sensible (token, contraseñas, etc.).
@@ -133,50 +148,19 @@ _Parameters_
 Ejemplo:
 | **Nombre del parámetro** | **Tipo** | **Obligatoriedad** | **Descripción** | **Valor de prueba** |
 |--|--|--|--|--|
-| tipoConsulta | String | ✅ | Número móvil | 3102330333 |
-| datosConsUno | String | ✅ | Número de documento (cédula) | 1090777777 |
-| datosConsDos | String | ✅ | Seleccionar alguna de estas opciones: 1, 2, 3, 4 | 1 |
+| name | String | ✅ | Nombre del pokemon | pikachu |
 
 _Response_
 
 ```JSON
 {
     "responseCode": 200,
-    "messageCode": "OK",
-    "message": "OK",
-    "legacy": "/web/services/CLCCAGR00_",
-    "timestamp": "2025-07-30T16:51:51.796Z",
-    "transactionId": "0ac953bc-4a26-4fef-a8c2-bc15795a6425",
-    "data": {
-        "code": 0,
-        "message": "Consulta exitosa",
-        "account": "21483002",
-        "isActiveUser": "1",
-        "hasArrears": "1",
-        "nonMultiplayNon": "1",
-        "isCycleChangeEligible": "1",
-        "cicleOption": "1",
-        "currentCycle": "02",
-        "currentBillingDate": "20250702",
-        "currentCustomerCount": 961661,
-        "cycleProposals": [
-            {
-                "cycle": "10",
-                "billingDate": "20250710",
-                "customerCount": "4310"
-            },
-            {
-                "cycle": "17",
-                "billingDate": "20250717",
-                "customerCount": "15915"
-            },
-            {
-                "cycle": "",
-                "billingDate": "",
-                "customerCount": ""
-            }
-        ]
-    }
+    "message": "Operación exitosa",
+	"data": {
+		...
+	}
+	"timestamp": "2026-03-02T20:25:07.640Z",
+    "transactionId": "5d358562-b67e-4571-86f5-6837faa9fde1"
 }
 
 ```
