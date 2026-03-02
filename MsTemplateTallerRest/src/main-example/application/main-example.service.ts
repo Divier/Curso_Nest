@@ -6,6 +6,7 @@ import { Etask, MSG_500 } from '../../share/domain/resources/constants';
 
 import { AppLoggerService } from '../../share/domain/config/logger.service';
 import { ProviderService } from '../infrastructure/infrastructure/rest/impl/provider.service.impl';
+
 import { IRequestConfigHttp } from 'src/share/domain/config/request-config-http.models';
 
 /**

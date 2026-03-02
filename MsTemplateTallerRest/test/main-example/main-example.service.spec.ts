@@ -17,90 +17,103 @@ import {
   OK,
 } from '../../src/share/domain/resources/constants';
 import { MainExampleService } from '../../src/main-example/application/main-example.service';
-import { IProviderService } from '../../src/main-example/infrastructure/infrastructure/rest/provider.service';
+//import { IProviderService } from '../../src/main-example/infrastructure/infrastructure/rest/provider.service';
+import { EHttpMethod } from '../../src/share/domain/config/request-config-http.models';
+import { ProviderService } from '../../src/main-example/infrastructure/infrastructure/rest/impl/provider.service.impl';
 
 describe('MainExampleService', () => {
-  let service: MainExampleService;
-  let providerService: IProviderService;
-  let logger: AppLoggerService;
-
-  const mockProviderService = {
-    executeRest: jest.fn(),
-  };
-
-  const mockLogger = {
-    error: jest.fn(),
-    log: jest.fn(),
-    warn: jest.fn(),
-  };
-
-  const mockConfigService = {
-    REST: {
-      URL: 'https://pokeapi.co/api/v2/pokemon',
-      TIMEOUT: 5000,
-      HEADERS_TIMEOUT: 3000,
-    },
-  };
-
-  const mockProcessTime = {
-    end: jest.fn().mockReturnValue(100),
-  };
-
-  const mockNewContractRequest = {
-    param1: 'value1',
-    param2: 'value2',
-  } as any;
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        MainExampleService,
-        {
-          provide: IProviderService,
-          useValue: mockProviderService,
-        },
-        {
-          provide: AppLoggerService,
-          useValue: mockLogger,
-        },
-        {
-          provide: config.KEY,
-          useValue: mockConfigService,
-        },
-        {
-          provide: 'TransactionId',
-          useValue: 'test-transaction-id',
-        },
-      ],
-    }).compile();
-
-    service = await module.resolve<MainExampleService>(MainExampleService);
-    providerService = await module.resolve<IProviderService>(IProviderService);
-    logger = await module.resolve<AppLoggerService>(AppLoggerService);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+    let service: MainExampleService;
+    let providerService: ProviderService;
+    let logger: AppLoggerService;
+  
+    const mockProviderService = {
+      executeRest: jest.fn(),
+    };
+  
+    const mockLogger = {
+      error: jest.fn(),
+      log: jest.fn(),
+      warn: jest.fn(),
+    };
+  
+    const mockConfigService = {
+      REST: {
+        URL: 'https://pokeapi.co/api/v2/pokemo',
+        TIMEOUT: 5000,
+        HEADERS_TIMEOUT: 3000,
+      },
+    };
+  
+    const mockProcessTime = {
+      end: jest.fn().mockReturnValue(100),
+    };
+  
+    const mockNewRequest = {
+      limit: 5,
+      offset: 1,
+    } as any;
+  
+    beforeEach(async () => {
+      const module: TestingModule = await Test.createTestingModule({
+        providers: [
+          MainExampleService,
+          {
+            provide: ProviderService,
+            useValue: mockProviderService,
+          },
+          {
+            provide: AppLoggerService,
+            useValue: mockLogger,
+          },
+          {
+            provide: config.KEY,
+            useValue: mockConfigService,
+          },
+          {
+            provide: 'TransactionId',
+            useValue: 'test-transaction-id',
+          },
+        ],
+      }).compile();
+  
+      service = await module.resolve<MainExampleService>(MainExampleService);
+      providerService = await module.resolve<ProviderService>(ProviderService);
+      logger = await module.resolve<AppLoggerService>(AppLoggerService);
+    });
+  
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
   describe('consultExecOperationExample', () => {
     it('should successfully execute and return ApiResponseDto', async () => {
-      const mockResponse = new ApiResponseDto(
-        HttpStatus.OK,
-        OK,
-        { data: 'test' },
-        'txn-123',
-      );
-      mockProviderService.executeRest.mockResolvedValue(mockResponse);
+      
 
-      const result = await service.consultExecOperationExample(
-        mockNewContractRequest,
-        mockProcessTime,
-      );
+      const mockRequest = {
+              method: EHttpMethod.get,
+              url: 'http://test.com',
+              headers: {},
+              params: {
+                limit: 5,
+                offset: 1,
+              },
+              timeout: 5000,
+              headersTimeout: 3000,
+            };
+            const mockResponse = new ApiResponseDto(HttpStatus.OK, OK, {}, 'txn-123');
+            mockProviderService.executeRest.mockResolvedValue(mockResponse);
+      
+            const result = await service.consultExecOperationExample(mockRequest, mockProcessTime);
+      
+            console.log('Result:', result);
 
-      expect(result).toBeDefined();
-      expect(result.responseCode).toBe(HttpStatus.OK);
-      expect(result.message).toBe(OK);
+            expect(providerService.executeRest).toHaveBeenCalledWith(
+              mockRequest,
+              Etask.CONSUMO_SERVICIO_REST,
+            );
+            expect(result).toEqual(mockResponse);
+
+
     });
 
     it('should throw BusinessException on error', async () => {
@@ -109,7 +122,7 @@ describe('MainExampleService', () => {
 
       await expect(
         service.consultExecOperationExample(
-          mockNewContractRequest,
+          mockNewRequest,
           mockProcessTime,
         ),
       ).rejects.toThrow(BusinessException);

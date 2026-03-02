@@ -30,6 +30,8 @@ export const enum TYPE_SEARCH {
 }
 
 export const ERROR = 'Error';
+export const MSG_EMPATY_FILTERS =
+  "Debe proporcionar al menos uno de los siguientes filtros: 'subscriberNumber', 'accountNumber' o 'financialDocID'.";
 export const MSG_LEGACY_504 =
   'El servidor no recibió una respuesta a tiempo de un servicio externo';
 export const MSG_504 = 'Gateway Timeout';
