@@ -1,9 +1,9 @@
 import { HttpStatus } from '@nestjs/common';
-import { MainExampleService } from '../../src/main-example/application/main-example.service';
-import { AppLoggerService } from '../../src/share/domain/config/logger.service';
-import { ApiResponseDto } from '../../src/share/domain/dto/apiResponse.dto';
-import { Etask, MSG_500, OK } from '../../src/share/domain/resources/constants';
-import { ProviderService } from '../../src/main-example/infrastructure/infrastructure/rest/impl/provider.service.impl';
+import { MainExampleService } from '../../../src/main-example/application/main-example.service';
+import { AppLoggerService } from '../../../src/share/domain/config/logger.service';
+import { ApiResponseDto } from '../../../src/share/domain/dto/apiResponse.dto';
+import { Etask, MSG_500, OK } from '../../../src/share/domain/resources/constants';
+import { ProviderService } from '../../../src/main-example/infrastructure/infrastructure/rest/impl/provider.service.impl';
 
 describe('MainExampleService', () => {
 	let service: MainExampleService;

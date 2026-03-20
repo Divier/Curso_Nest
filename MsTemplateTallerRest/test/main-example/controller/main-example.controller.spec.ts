@@ -1,7 +1,7 @@
-import { MainExampleController } from '../../src/main-example/controller/main-example.controller';
-import { MainExampleService } from '../../src/main-example/application/main-example.service';
-import { ProcessTimeService } from '../../src/share/domain/config/processTime.service';
-import { AppLoggerService } from '../../src/share/domain/config/logger.service';
+import { MainExampleController } from '../../../src/main-example/controller/main-example.controller';
+import { MainExampleService } from '../../../src/main-example/application/main-example.service';
+import { ProcessTimeService } from '../../../src/share/domain/config/processTime.service';
+import { AppLoggerService } from '../../../src/share/domain/config/logger.service';
 
 jest.mock(
 	'src/share/domain/config/request-config-http.models',
@@ -111,6 +111,43 @@ describe('MainExampleController', () => {
 	});
 
 	describe('restGetPokemonByNameExampleController', () => {
+
+		it('should call service and send mapped success response', async () => {
+			const reply = buildReply();
+			const serviceData = { results: [{ name: 'pikachu' }] };
+
+			mockMainExampleService.consultExecOperationExample.mockResolvedValue({
+				responseCode: 200,
+				message: 'Operación exitosa',
+				data: serviceData,
+				timestamp: new Date().toISOString(),
+				transactionId: 'external',
+			});
+
+			await controller.restGetPokemonByNameExampleController(
+				reply as any,
+				'pikachu',
+			);
+
+			expect(mockMainExampleService.consultExecOperationExample).toHaveBeenCalledWith(
+				{
+					url: 'https://pokeapi.co/api/v2/pokemon/pikachu',
+					method: 'GET',
+				},
+				processTime,
+			);
+			expect(reply.status).toHaveBeenCalledWith(200);
+			expect(reply.send).toHaveBeenCalledWith(
+				expect.objectContaining({
+					responseCode: 200,
+					message: 'Operación exitosa',
+					data: serviceData,
+					transactionId: 'txn-test',
+					timestamp: expect.any(String),
+				}),
+			);
+		});
+
 		it('should send not found response when service returns 404', async () => {
 			const reply = buildReply();
 

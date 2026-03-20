@@ -91,7 +91,7 @@ En esta sección se deben indicar cada uno de los métodos del microservicio. La
 | Descripción | Trae un listado de pokemones |
 | _Request headers_ |  |
 
-**Request (*Parameters*/*Body*)**
+**Request (*Parameters*)**
 
 _Parameters_ (si aplica, por ejemplo en métodos `GET`)
 
@@ -141,7 +141,7 @@ Ejemplo:
 
 \* No exponer información sensible (token, contraseñas, etc.).
 
-**Request (*Parameters*/*Body*)**
+**Request (*Parameters*)**
 
 _Parameters_ 
 
@@ -171,44 +171,13 @@ _Response_
 
 #### Consumo de servicios SOAP/REST/GraphQL
 
-- **Tipo:** Tipo de legado (p. ej., SOAP).
+- **Tipo:** REST.
 
 - **Métodos disponibles u operaciones:** Detalle de los métodos disponibles.
 
 - **URL o _Endpoint_:** Explicación del formato.
 
 - **Ejemplo de consumo:** Ejemplo de cómo consumir el legado (p. ej., SOAP).
-
-#### Consumo de base de datos
-
-- **Conexión a la base de datos:** Detalles de conexión*.
-- **Consultas:** Indicar las consultas, procedimientos almacenados o colecciones que utiliza el microservicio.
-
-  - Colección/Procedimiento A
-  - Colección/Procedimiento B
-
-- **Consulta SQL:** Ejemplo de consulta, parámetros de entrada y de salida, respuesta esperada.
-
-Ejemplo:
-| **Parámetro** | **Tipo de dato** | **Tipo (Entrada/Salida)** | **Descripción**                        | **Ejemplo**            |
-|-----------|--------------|------------------------|------------------------------------|---------------------|
-| idCliente | INT          | Entrada                | Identificador del cliente          | 10245               |
-| fechaIni  | DATE         | Entrada                | Fecha inicial del rango de consulta| 2025-01-01          |
-| fechaFin  | DATE         | Entrada                | Fecha final del rango de consulta  | 2025-01-31          |
-| saldo     | DECIMAL      | Salida                 | Saldo total del cliente            | 3450.75             |
-| estado    | VARCHAR(10)  | Salida                 | Estado de la cuenta                | ACTIVO              |
-
-#### Consumo de otros legados
-
-- **Tipo:** Tipo de legado (p. ej., PCML, SFTP, SMTP).
-
-- **Nombre:** Nombre del legado (p. ej., RR).
-
-- **URL o _Endpoint_:** Por el cual se realiza la conexión.
-
-- **Ejemplo de consumo:** Especificar un ejemplo de consumo del legado. Si no aplica, especificar el motivo. 
-
-\* No exponer información sensible como contraseñas de conexión a la BD.
 
 ---  
 
